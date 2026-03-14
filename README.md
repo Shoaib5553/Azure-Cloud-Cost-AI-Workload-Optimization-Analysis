@@ -28,10 +28,6 @@ To simulate a real-world Azure billing environment, raw cloud telemetry (CPU, Me
 * **Workload Mapping:** Compute costs were programmatically assigned to specific CSE AI/ML engineering workloads.
 * **Relational Model:** The flat CSV was normalized into a highly efficient **Star Schema** featuring a central `Fact_Telemetry` table surrounded by `Dim_Hardware`, `Dim_Workload`, and `Dim_Date` tables.
 
-## 🔐 Enterprise Security (Row Level Security)
-This file includes pre-configured Row-Level Security (RLS) to demonstrate enterprise data governance.
-* **Role - `AI_Engineering_Lead`:** Filtered via DAX to only view telemetry and costs associated with the MirrorDB and GAN engineering workloads.
-* **Role - `Cloud_Admin`:** Unrestricted access to all departmental cloud spend.
 
 ## 🚀 How to Run the Project
 1. Download the `.pbix` file from this repository.
