@@ -1,39 +1,54 @@
-# Azure Cloud Cost & AI Workload Optimization
+# Azure Cloud FinOps & AI Workload Optimization Dashboard ☁️📊
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
+![Executive Overview](images/overview.png)
+
+## 🔗 Quick Links
+* **[📥 Download the Interactive Power BI Dashboard (.pbix)](https://1drv.ms/u/c/429fd3f1c5c4ff98/IQDaqX2xg2ZGRLXntn6gnKx6AWK_sdZhyodE5qkxEEMtI4g?e=feBq9p)**
+* **[📊 View the Raw Dataset on Kaggle](https://www.kaggle.com/datasets/abdurraziq01/cloud-computing-performance-metrics)**
+
 ## 📌 Project Overview
-Developed an enterprise-grade Power BI dashboard focuses on Cloud FinOps and infrastructure optimization. The primary objective is to ingest raw server telemetry, simulate Azure billing environments, and identify "Zombie Servers" (idle compute instances wasting financial resources). 
+As enterprise cloud computing costs spiral out of control—particularly with the deployment of heavy, resource-intensive AI workloads like LLM training and Predictive Analytics pipelines—engineering and management teams struggle to identify and eliminate wasted spend. 
 
-A core focus of this diagnostic tool is isolating the heavy compute costs associated with Artificial Intelligence workloads, specifically tracking high-tier GPU usage for projects like the **MirrorDB Synthetic Data Engine** and **AQI Deep Learning Models**.
+This project is an end-to-end **Azure Cloud FinOps Dashboard** built in Power BI. It ingests synthetic server telemetry data, processes it through a Star Schema data model, and provides interactive diagnostic tools to hunt down "Zombie Servers" (virtual machines operating at low CPU utilization but high cost).
 
-## 🛠️ Tech Stack
+## 🎯 Business Impact
+* **Cost Identification:** Successfully isolated **$207.3K** in simulated wasted cloud spend out of a $1.38M budget (~15% waste ratio).
+* **Workload Traceability:** Mapped specific AI workloads to Azure GPU hardware (e.g., NC A100 instances) to trace expenses down to the exact virtual machine ID.
+* **Actionable Automation:** Generated an Automation Heatmap to visually expose idle server hours, providing cloud engineering teams with the exact schedules needed to write automated shutdown scripts.
+
+## 🛠️ Tech Stack & Methodologies
 * **BI Tool:** Power BI Desktop
-* **Data Engineering:** Power Query (M Code) for ETL and data synthesis
-* **Analytics:** DAX (Data Analysis Expressions) for What-If scenario modeling and time-intelligence
-* **Data Modeling:** Star Schema architecture
+* **Data Engineering:** Power Query (M Language) for data transformation, datetime splitting, and conditional column generation.
+* **Data Modeling:** Star Schema architecture (1 Fact Table, 3 Dimension Tables).
+* **Calculations:** DAX (Data Analysis Expressions) for dynamic measures and financial aggregations.
+* **Advanced Analytics:** Exponential Smoothing (30-day forecasting), Root Cause Analysis (Decomposition Tree), and 'What-If' Parameter Simulation.
 
-## 📊 Dashboard Architecture & Features
+## 📈 Key Dashboard Features
 
-The project is structured into four highly focused, interactive report pages:
+### 1. Executive Overview
+Provides a high-level summary of total cloud spend versus total wasted spend. Features a 30-day predictive forecast and a workload breakdown to immediately identify which AI pipelines are driving the most cost.
 
-1. **Executive Overview:** High-level FinOps KPIs (Total Spend, Wasted Spend, Avg CPU Utilization) and a 30-day automated cost forecast using Power BI's native predictive analytics.
-2. **AI & GPU Workload Tracker:** A Decomposition Tree allowing managers to drill down from total cloud spend directly into specific AI projects, Azure hardware tiers, and individual Virtual Machine IDs.
-3. **Zombie Server Diagnostics:** A diagnostic scatter plot identifying high-cost, low-utilization servers. Features a dynamic **What-If Parameter** that calculates real-time financial savings if servers running below 15% CPU are shut down.
-4. **Peak Hours Heatmap:** A day-by-hour matrix visualizing exact server utilization trends, providing the data-backed justification needed to schedule automated off-peak server shutdowns.
+### 2. AI Workload Cost Traceability
+Utilizes an interactive **Decomposition Tree** to allow stakeholders to drill down from massive operational budgets directly into specific assigned workloads, Azure hardware tiers, and individual VM IDs.
 
-## 🗄️ Data Engineering & Star Schema
-To simulate a real-world Azure billing environment, raw cloud telemetry (CPU, Memory, Execution Time) was transformed via Power Query. 
-* **Data Synthesis:** A custom Azure Rate Card was engineered to map generic `task_types` to specific Microsoft hardware (e.g., Azure NC A100 GPUs, Azure D-Series).
-* **Workload Mapping:** Compute costs were programmatically assigned to specific CSE AI/ML engineering workloads.
-* **Relational Model:** The flat CSV was normalized into a highly efficient **Star Schema** featuring a central `Fact_Telemetry` table surrounded by `Dim_Hardware`, `Dim_Workload`, and `Dim_Date` tables.
+### 3. Zombie Server Diagnostics (Simulator)
+A scatter plot matrix identifying servers with high costs and low CPU usage. Includes a dynamic **'What-If' Parameter Slicer** that allows users to adjust the "Zombie" CPU threshold (e.g., from 15% to 20%) and instantly watch the Wasted Spend metrics recalculate in real-time.
 
+### 4. Automation Heatmap
+A heavily formatted matrix visual mapping average CPU usage across the days of the week and hours of the day. Identifies exact idle windows (highlighted in red) where servers can be safely automated to shut down, saving compute costs.
 
-## 🚀 How to Run the Project
-1. Download the `.pbix` file from this repository.
-2. Open the file using **Power BI Desktop** (Free).
-3. To test the security architecture, navigate to the **Modeling** tab, click **View as**, and select the `AI_Engineering_Lead` role.
-4. Navigate to the **Zombie Server** page to interact with the What-If savings slider.
+## 📂 Repository Structure
+* `Capstone_Presentation.pdf`: The slide deck summarizing the business problem, system approach, and results.
+* `DataDictionary.md`: Documentation of the Star Schema, DAX measures, and data transformations.
+* `/images`: Folder containing high-resolution screenshots of the dashboard pages.
+
+## 🚀 How to Use
+1. Download the `.pbix` file using the **Quick Link** at the top of this page.
+2. Open the file using Power BI Desktop.
+3. Navigate through the pages using the left-hand navigation rail.
+4. On the **Diagnostics** page, adjust the "Target CPU Threshold" slider to dynamically simulate cost savings.
 
 ## 📄 License
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
